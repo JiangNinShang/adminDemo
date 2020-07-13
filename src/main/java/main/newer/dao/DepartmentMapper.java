@@ -2,7 +2,7 @@ package main.newer.dao;
 
 import main.newer.domain.Department;
 
-public interface DepartmentMapper {
+public interface DepartmentMapper{
     int deleteByPrimaryKey(Integer did);
 
     int insert(Department record);

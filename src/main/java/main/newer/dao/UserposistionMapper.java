@@ -1,8 +1,9 @@
 package main.newer.dao;
 
 import main.newer.domain.Userposistion;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface UserposistionMapper {
+public interface UserposistionMapper extends Mapper<Userposistion> {
     int deleteByPrimaryKey(Integer upid);
 
     int insert(Userposistion record);

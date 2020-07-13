@@ -1,8 +1,9 @@
 package main.newer.dao;
 
 import main.newer.domain.PositionJurisdiction;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface PositionJurisdictionMapper {
+public interface PositionJurisdictionMapper extends Mapper<PositionJurisdiction>{
     int deleteByPrimaryKey(Integer pjid);
 
     int insert(PositionJurisdiction record);

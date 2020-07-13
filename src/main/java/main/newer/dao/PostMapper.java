@@ -1,8 +1,9 @@
 package main.newer.dao;
 
 import main.newer.domain.Post;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface PostMapper {
+public interface PostMapper extends Mapper<Post>{
     int deleteByPrimaryKey(Integer pid);
 
     int insert(Post record);

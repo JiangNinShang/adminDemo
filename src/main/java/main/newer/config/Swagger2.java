@@ -1,4 +1,4 @@
-package main.newer.springBoot;
+package main.newer.config;
 
 import java.util.ArrayList;
 

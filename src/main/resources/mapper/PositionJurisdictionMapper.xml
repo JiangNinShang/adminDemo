@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.newer.dao.PositionJurisdictionMapper">
+  <resultMap id="BaseResultMap" type="main.newer.domain.PositionJurisdiction">
+    <id column="pjid" jdbcType="INTEGER" property="pjid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="jid" jdbcType="INTEGER" property="jid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pjid, pid, jid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PositionJurisdiction
+    where pjid = #{pjid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from PositionJurisdiction
+    where pjid = #{pjid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="main.newer.domain.PositionJurisdiction">
+    insert into PositionJurisdiction (pjid, pid, jid
+      )
+    values (#{pjid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{jid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="main.newer.domain.PositionJurisdiction">
+    insert into PositionJurisdiction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pjid != null">
+        pjid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="jid != null">
+        jid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pjid != null">
+        #{pjid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="jid != null">
+        #{jid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="main.newer.domain.PositionJurisdiction">
+    update PositionJurisdiction
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="jid != null">
+        jid = #{jid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pjid = #{pjid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="main.newer.domain.PositionJurisdiction">
+    update PositionJurisdiction
+    set pid = #{pid,jdbcType=INTEGER},
+      jid = #{jid,jdbcType=INTEGER}
+    where pjid = #{pjid,jdbcType=INTEGER}
+  </update>
+</mapper>

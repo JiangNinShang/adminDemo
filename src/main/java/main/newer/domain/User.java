@@ -1,83 +1,146 @@
 package main.newer.domain;
 
-public class User {
-    private Integer uid;
+import java.io.Serializable;
 
-    private String uname;
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private String password;
+	private Integer uid;
 
-    private String sex;
+	private String uname;
 
-    private Integer age;
+	private String password;
 
-    private String address;
+	private String head;
 
-    private String mail;
+	private int phone;
 
-    private Integer deleted;
+	private String sex;
 
-    public Integer getUid() {
-        return uid;
-    }
+	private Integer age;
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
+	private Integer addressId;
 
-    public String getUname() {
-        return uname;
-    }
+	private String mail;
 
-    public void setUname(String uname) {
-        this.uname = uname == null ? null : uname.trim();
-    }
+	private Integer deleted;
 
-    public String getPassword() {
-        return password;
-    }
+	private Integer state;
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+	public Integer getUid() {
+		return uid;
+	}
 
-    public String getSex() {
-        return sex;
-    }
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
+	public String getUname() {
+		return uname;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setUname(String uname) {
+		this.uname = uname == null ? null : uname.trim();
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setPassword(String password) {
+		this.password = password == null ? null : password.trim();
+	}
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public String getMail() {
-        return mail;
-    }
+	public void setSex(String sex) {
+		this.sex = sex == null ? null : sex.trim();
+	}
 
-    public void setMail(String mail) {
-        this.mail = mail == null ? null : mail.trim();
-    }
+	public Integer getAge() {
+		return age;
+	}
 
-    public Integer getDeleted() {
-        return deleted;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail == null ? null : mail.trim();
+	}
+
+	public Integer getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Integer deleted) {
+		this.deleted = deleted;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public String getHead() {
+		return head;
+	}
+
+	public void setHead(String head) {
+		this.head = head;
+	}
+
+	public Integer getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	@Override
+	public String toString() {
+		return "User [uid=" + uid + ", uname=" + uname + ", password=" + password + ", head=" + head + ", phone="
+				+ phone + ", sex=" + sex + ", age=" + age + ", addressId=" + addressId + ", mail=" + mail + ", deleted="
+				+ deleted + ", state=" + state + "]";
+	}
+
+	public User(Integer uid, String uname, String password, String head, int phone, String sex, Integer age,
+			Integer addressId, String mail, Integer deleted, Integer state) {
+		super();
+		this.uid = uid;
+		this.uname = uname;
+		this.password = password;
+		this.head = head;
+		this.phone = phone;
+		this.sex = sex;
+		this.age = age;
+		this.addressId = addressId;
+		this.mail = mail;
+		this.deleted = deleted;
+		this.state = state;
+	}
+
+	public User() {
+	}
 }

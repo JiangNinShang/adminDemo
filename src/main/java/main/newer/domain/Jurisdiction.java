@@ -1,43 +1,59 @@
 package main.newer.domain;
 
-public class Jurisdiction {
-    private Integer jid;
+import java.io.Serializable;
 
-    private String jname;
+public class Jurisdiction implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int jid;
+	private String jname;
+	private String jpath;
+	private Integer state;
+	
+	public int getJid() {
+		return jid;
+	}
 
-    private String jpath;
+	public void setJid(int jid) {
+		this.jid = jid;
+	}
 
-    private Integer deleted;
+	public String getJname() {
+		return jname;
+	}
 
-    public Integer getJid() {
-        return jid;
-    }
+	public void setJname(String jname) {
+		this.jname = jname;
+	}
 
-    public void setJid(Integer jid) {
-        this.jid = jid;
-    }
+	public String getJpath() {
+		return jpath;
+	}
 
-    public String getJname() {
-        return jname;
-    }
+	public void setJpath(String jpath) {
+		jpath = jpath;
+	}
 
-    public void setJname(String jname) {
-        this.jname = jname == null ? null : jname.trim();
-    }
+	public Integer getState() {
+		return state;
+	}
 
-    public String getJpath() {
-        return jpath;
-    }
+	public void setState(Integer state) {
+		this.state = state;
+	}
 
-    public void setJpath(String jpath) {
-        this.jpath = jpath == null ? null : jpath.trim();
-    }
+	public Jurisdiction() {
+		// TODO Auto-generated constructor stub
+	}
 
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
+	public Jurisdiction(int jid, String jname, String jpath, Integer state) {
+		super();
+		this.jid = jid;
+		this.jname = jname;
+		this.jpath = jpath;
+		this.state = state;
+	}
+	
 }

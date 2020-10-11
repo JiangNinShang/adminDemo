@@ -2,16 +2,28 @@ package main.newer.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+@ApiModel("图片")
+@Table(name = "Picture")
 public class Picture implements Serializable{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int pid;
+	@Id
+	@ApiModelProperty("编号")
+	private Integer pid;
+	@Column(name = "pPath")
+	@ApiModelProperty("路径")
 	private String pPath;
 	
 	public Picture() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -19,17 +31,17 @@ public class Picture implements Serializable{
 		return "Picture [pid=" + pid + ", pPath=" + pPath + "]";
 	}
 
-	public Picture(int pid, String pPath) {
+	public Picture(Integer pid, String pPath) {
 		super();
 		this.pid = pid;
 		this.pPath = pPath;
 	}
 
-	public int getPid() {
+	public Integer getPid() {
 		return pid;
 	}
 
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 
@@ -41,8 +53,5 @@ public class Picture implements Serializable{
 		this.pPath = pPath;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
 }

@@ -2,21 +2,34 @@ package main.newer.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+@ApiModel("部门")
+@Table(name = "Departmen")
 public class Departmen implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int Did;
+	@Id
+	@ApiModelProperty("部门编号")
+	private Integer Did;
+	@Column(name = "Dname")
+	@ApiModelProperty("部门名称")
 	private String Dname;
+	@Column(name = "principal")
+	@ApiModelProperty("负责人")
 	private Integer principal;
-	private int sum;
 	
-	public int getDid() {
+	public Integer getDid() {
 		return Did;
 	}
 
-	public void setDid(int did) {
+	public void setDid(Integer did) {
 		Did = did;
 	}
 
@@ -36,23 +49,15 @@ public class Departmen implements Serializable{
 		this.principal = principal;
 	}
 
-	public int getSum() {
-		return sum;
-	}
-
-	public void setSum(int sum) {
-		this.sum = sum;
-	}
 
 	public Departmen() {
 	}
 
-	public Departmen(int did, String dname, Integer principal, int sum) {
+	public Departmen(Integer did, String dname, Integer principal) {
 		super();
 		Did = did;
 		Dname = dname;
 		this.principal = principal;
-		this.sum = sum;
 	}
 	
 }

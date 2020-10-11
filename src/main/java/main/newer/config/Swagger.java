@@ -27,7 +27,7 @@ public class Swagger {
 	private ApiInfo apilnfo() {
 		Contact contact = new Contact("wanglihui", null, null);
 		return new ApiInfo(
-				 "Swagger学习", // 标题
+				 "Swagger", // 标题
 		           "学习演示如何配置Swagger", // 描述
 		           "v1.0", // 版本
 		           "http://terms.service.url/组织链接", // 组织链接

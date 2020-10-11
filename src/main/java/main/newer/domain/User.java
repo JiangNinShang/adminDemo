@@ -2,32 +2,52 @@ package main.newer.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+@ApiModel("员工")
+@Table(name = "User")
 public class User implements Serializable{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	@Id
+	@ApiModelProperty("员工编号")
 	private Integer uid;
-
+	@Column(name = "uname")
+	@ApiModelProperty("员工名称")
 	private String uname;
-
+	@Column(name = "password")
+	@ApiModelProperty("密码")
 	private String password;
-
-	private String head;
-
-	private int phone;
-
+	@Column(name = "head")
+	@ApiModelProperty("头像")
+	private Integer head;
+	@Column(name = "phone")
+	@ApiModelProperty("联系电话")
+	private Integer phone;
+	@Column(name = "sex")
+	@ApiModelProperty("性别")
 	private String sex;
-
+	@Column(name = "age")
+	@ApiModelProperty("年龄")
 	private Integer age;
-
+	@Column(name = "addressId")
+	@ApiModelProperty("地址编号")
 	private Integer addressId;
-
+	@Column(name = "mail")
+	@ApiModelProperty("电子邮箱")
 	private String mail;
-
+	@Column(name = "deleted")
+	@ApiModelProperty("在线状态")
 	private Integer deleted;
-
+	@Column(name = "Dname")
+	@ApiModelProperty("状态")
 	private Integer state;
 
 	public Integer getUid() {
@@ -86,19 +106,19 @@ public class User implements Serializable{
 		this.deleted = deleted;
 	}
 
-	public int getPhone() {
+	public Integer getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
 
-	public String getHead() {
+	public Integer getHead() {
 		return head;
 	}
 
-	public void setHead(String head) {
+	public void setHead(Integer head) {
 		this.head = head;
 	}
 
@@ -125,7 +145,7 @@ public class User implements Serializable{
 				+ deleted + ", state=" + state + "]";
 	}
 
-	public User(Integer uid, String uname, String password, String head, int phone, String sex, Integer age,
+	public User(Integer uid, String uname, String password, Integer head, Integer phone, String sex, Integer age,
 			Integer addressId, String mail, Integer deleted, Integer state) {
 		super();
 		this.uid = uid;

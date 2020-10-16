@@ -1,5 +1,12 @@
 package main.newer.service;
 
-public interface UserService {
+import main.newer.dto.UserDto;
 
+public interface UserService {
+	/**
+	 * 
+	 * @param user
+	 * @return boolean
+	 */
+	Boolean Login(UserDto user);
 }

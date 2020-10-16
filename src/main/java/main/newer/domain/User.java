@@ -22,9 +22,9 @@ public class User implements Serializable{
 	@Column(name = "uname")
 	@ApiModelProperty("员工名称")
 	private String uname;
-	@Column(name = "password")
+	@Column(name = "upwd")
 	@ApiModelProperty("密码")
-	private String password;
+	private String upwd;
 	@Column(name = "head")
 	@ApiModelProperty("头像")
 	private Integer head;
@@ -46,7 +46,7 @@ public class User implements Serializable{
 	@Column(name = "deleted")
 	@ApiModelProperty("在线状态")
 	private Integer deleted;
-	@Column(name = "Dname")
+	@Column(name = "state")
 	@ApiModelProperty("状态")
 	private Integer state;
 
@@ -66,12 +66,14 @@ public class User implements Serializable{
 		this.uname = uname == null ? null : uname.trim();
 	}
 
-	public String getPassword() {
-		return password;
+	
+
+	public String getUpwd() {
+		return upwd;
 	}
 
-	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
+	public void setUpwd(String upwd) {
+		this.upwd = upwd;
 	}
 
 	public String getSex() {
@@ -140,17 +142,17 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", uname=" + uname + ", password=" + password + ", head=" + head + ", phone="
+		return "User [uid=" + uid + ", uname=" + uname + ", upwd=" + upwd + ", head=" + head + ", phone="
 				+ phone + ", sex=" + sex + ", age=" + age + ", addressId=" + addressId + ", mail=" + mail + ", deleted="
 				+ deleted + ", state=" + state + "]";
 	}
 
-	public User(Integer uid, String uname, String password, Integer head, Integer phone, String sex, Integer age,
+	public User(Integer uid, String uname, String upwd, Integer head, Integer phone, String sex, Integer age,
 			Integer addressId, String mail, Integer deleted, Integer state) {
 		super();
 		this.uid = uid;
 		this.uname = uname;
-		this.password = password;
+		this.upwd = upwd;
 		this.head = head;
 		this.phone = phone;
 		this.sex = sex;

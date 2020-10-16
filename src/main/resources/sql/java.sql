@@ -51,3 +51,14 @@ CREATE TABLE UserPosition (
   pid int(11) NOT NULL COMMENT '职位编号'
 ) ;
 
+CREATE TABLE Address(
+  aid int(11) PRIMARY KEY COMMENT '编号',
+  address varchar(200) NOT NULL COMMENT '地址'
+) ;
+
+CREATE TABLE Ua(
+  uaid int(11) PRIMARY KEY COMMENT '编号',
+  uid int(11) NOT NULL COMMENT '用户编号',
+  aid int(11) NOT NULL COMMENT '地址编号'
+) ;
+

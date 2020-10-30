@@ -24,8 +24,17 @@ public class UserServiceImpl implements UserService{
 		c.andEqualTo("uname", user.getUname());
 		c.andEqualTo("upwd", user.getUpwd());
 		User ur = um.selectOneByExample(e);
-		System.out.println(ur.toString());
 		if(null == ur) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean regiest(UserDto user) {
+		User u = new User(user.getUname(),user.getUpwd(),0,user.getPhone(),user.getSex(),user.getAge(),0,user.getMail(),0,0);
+		int i = um.insert(u);
+		if(i == 0) {
 			return false;
 		}
 		return true;

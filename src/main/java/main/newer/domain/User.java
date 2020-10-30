@@ -8,17 +8,18 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 @ApiModel("员工")
 @Table(name = "User")
-public class User implements Serializable{
-	
+public class User implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@ApiModelProperty("员工编号")
-	private Integer uid;
+	private int uid;
 	@Column(name = "uname")
 	@ApiModelProperty("员工名称")
 	private String uname;
@@ -30,7 +31,7 @@ public class User implements Serializable{
 	private Integer head;
 	@Column(name = "phone")
 	@ApiModelProperty("联系电话")
-	private Integer phone;
+	private String phone;
 	@Column(name = "sex")
 	@ApiModelProperty("性别")
 	private String sex;
@@ -65,8 +66,6 @@ public class User implements Serializable{
 	public void setUname(String uname) {
 		this.uname = uname == null ? null : uname.trim();
 	}
-
-	
 
 	public String getUpwd() {
 		return upwd;
@@ -108,11 +107,11 @@ public class User implements Serializable{
 		this.deleted = deleted;
 	}
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -142,15 +141,30 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", uname=" + uname + ", upwd=" + upwd + ", head=" + head + ", phone="
-				+ phone + ", sex=" + sex + ", age=" + age + ", addressId=" + addressId + ", mail=" + mail + ", deleted="
+		return "User [uid=" + uid + ", uname=" + uname + ", upwd=" + upwd + ", head=" + head + ", phone=" + phone
+				+ ", sex=" + sex + ", age=" + age + ", addressId=" + addressId + ", mail=" + mail + ", deleted="
 				+ deleted + ", state=" + state + "]";
 	}
 
-	public User(Integer uid, String uname, String upwd, Integer head, Integer phone, String sex, Integer age,
+	public User(Integer uid, String uname, String upwd, Integer head, String phone, String sex, Integer age,
 			Integer addressId, String mail, Integer deleted, Integer state) {
 		super();
 		this.uid = uid;
+		this.uname = uname;
+		this.upwd = upwd;
+		this.head = head;
+		this.phone = phone;
+		this.sex = sex;
+		this.age = age;
+		this.addressId = addressId;
+		this.mail = mail;
+		this.deleted = deleted;
+		this.state = state;
+	}
+
+	public User(String uname, String upwd, Integer head, String phone, String sex, Integer age, Integer addressId,
+			String mail, Integer deleted, Integer state) {
+		super();
 		this.uname = uname;
 		this.upwd = upwd;
 		this.head = head;

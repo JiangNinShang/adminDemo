@@ -25,6 +25,12 @@ public class ResultJSON {
 		this.status = status;
 		this.data = data;
 	}
+	public ResultJSON(boolean success, String info, int status) {
+		this.success = success;
+		this.result = info;
+		this.info = info;
+		this.status = status;
+	}
 
 	public boolean isSuccess() {
 		return success;
@@ -96,7 +102,14 @@ public class ResultJSON {
 	public static ResultJSON ok(Map<String, Object> data) {
 		return new ResultJSON(true, "操作成功", 200, data);
 	}
-
+	/* 简洁方法,操作成功,200,无返回值 */
+	public static ResultJSON ok(Boolean success) {
+		if(success) {
+			return new ResultJSON(success, "操作成功", 200);
+		}else {
+			return new ResultJSON(success, "操作失败", 400);
+		}
+	}
 	/* 返回值结果直接处理成JSON字符串 */
 	public String toJson() {
 		return new Gson().toJson(this);

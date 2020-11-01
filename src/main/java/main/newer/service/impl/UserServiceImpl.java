@@ -1,5 +1,7 @@
 package main.newer.service.impl;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,18 @@ public class UserServiceImpl implements UserService{
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public HashMap<String, Object> getName() {
+		Example e = new Example(User.class);
+		Criteria c =  e.createCriteria();
+		c.andIsNotNull("uname");
+		HashMap<String, Object> map =  new HashMap<String, Object>();
+		for(User u : um.selectByExample(e)) {
+			map.put(u.getUname(), null);
+		}
+		return map;
 	}
 
 }

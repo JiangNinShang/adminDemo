@@ -6,9 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
@@ -41,12 +43,27 @@ public class UserController {
 		logger.info(u.toString());
 		return ResultJSON.ok(us.regiest(u));
 	}
-	
+
 	@ApiOperation("用户名")
-	@PostMapping("/getName")
+	@GetMapping("/getName")
 	@RequestMapping("getName")
 	public ResultJSON getName() {
-		Map<String, Object> data = us.getName();  
+		Map<String, Object> data = us.getName();
 		return ResultJSON.ok(data);
+	}
+
+	@ApiOperation("根据用户名查询")
+	@PostMapping("/getbyName")
+	@RequestMapping("getbyName")
+	public ResultJSON getbyName(String name) {
+		Map<String, Object> data = us.getbyName(name);
+		return ResultJSON.ok(data);
+	}
+	
+	@ApiOperation("根据用户名修改密码")
+	@PostMapping("/updataPwd")
+	@RequestMapping("updataPwd")
+	public ResultJSON updataPwd(String name,String pwd) {
+		return ResultJSON.ok(us.updataPwd(name, pwd));
 	}
 }

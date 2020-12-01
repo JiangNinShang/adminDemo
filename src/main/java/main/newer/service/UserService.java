@@ -22,4 +22,17 @@ public interface UserService {
 	 * @return
 	 */
 	HashMap<String, Object> getName();
+	/**-
+	 * 根据字符搜索用户名
+	 * @param name
+	 * @return
+	 */
+	HashMap<String, Object> getbyName(String name);
+	/**
+	 * 根据用户名修盖密码
+	 * @param name
+	 * @param pwd
+	 * @return
+	 */
+	Boolean updataPwd(String name,String pwd);
 }

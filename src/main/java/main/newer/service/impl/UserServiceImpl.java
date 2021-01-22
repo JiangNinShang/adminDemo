@@ -46,11 +46,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public HashMap<String, Object> getName() {
-		Example e = new Example(User.class);
-		Criteria c = e.createCriteria();
-		c.andIsNotNull("uname");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		for (User u : um.selectByExample(e)) {
+		for (User u : um.selectAll()) {
 			map.put(u.getUname(), null);
 		}
 		return map;
@@ -63,7 +60,7 @@ public class UserServiceImpl implements UserService {
 		c.andEqualTo("uname", name);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		for (User u : um.selectByExample(e)) {
-			map.put("", u);
+			map.put(null, u);
 		}
 		return map;
 	}
@@ -80,6 +77,14 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public User getUserByName(String name) {
+		Example e = new Example(User.class);
+		Criteria c = e.createCriteria();
+		c.andEqualTo("uname", name);
+		return um.selectOneByExample(e);
 	}
 
 }

@@ -1,73 +1,73 @@
 package main.newer.shiro;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import org.apache.shiro.mgt.SecurityManager;
 
 @Configuration
 public class ShiroConfig {
-	// ShiroFilterFactoryBean:3
 	@Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        //设置安全管理器
-        shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
-        /*
-        anon:无需认证可以访问
-        authc：必须认证才能访问
-        user：必须拥有 记住我 功能才能用
-        perms：拥有对某个资源的权限才能访问
-        role:拥有某个角色权限才能访问
-         */
-        //登录拦截
-        Map<String, String> filterMap = new LinkedHashMap<>();
+	@ConditionalOnMissingBean
+	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+		DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
+		defaultAAP.setProxyTargetClass(true);
+		return defaultAAP;
+	}
 
-        //用户进入登录界面，无需认证
-        filterMap.put("/", "anon");
-        filterMap.put("/login", "anon");
-        filterMap.put("/tologin", "anon");
-        //用户进入系统，必须进行登录验证
-        filterMap.put("/sys/*", "authc");
-        //角色拦截
-        filterMap.put("/sys/admin", "authc,roles[admin]");
-        filterMap.put("/sys/user", "authc,roles[user]");
-        filterMap.put("/sys/company", "authc,roles[company]");
-        //权限拦截  设置admin下的所有方法都需要增删改查权限
-        filterMap.put("/sys/admin/*", "perms[admin:add,admin:update,admin:delete,admin:find]");
-        //设置user下的add，update，delete需要特定权限
-        filterMap.put("/sys/user/find", "perms[user:find]");
-        filterMap.put("/sys/user/delete", "perms[user:delete]");
-        filterMap.put("/sys/user/add", "perms[user:add]");
-        filterMap.put("/sys/user/update", "perms[user:update]");
-
-        //设置登出
-        filterMap.put("/logout", "logout");
-
-        //设置admin下的某个方法需要某个权限
-        // filterMap.put("/sys/admin/find", "perms[admin:find]");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
-        //设置登录请求
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        //设置401（无权限界面）
-        shiroFilterFactoryBean.setUnauthorizedUrl("/noauth");
-        return shiroFilterFactoryBean;
-    }
-
-	// DefaultWebSecurityManager:2
-	@Bean("defaultWebSecurityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm) {
-        DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        //关联userRealm
-        defaultWebSecurityManager.setRealm(userRealm);
-        return defaultWebSecurityManager;
-    }
-	// 创建 realm对象,需要自定义:1
-	@Bean("userRealm")
-	public 	UserRealm getUserRealm() {
+	// 将自己的验证方式加入容器
+	@Bean
+	public UserRealm myShiroRealm() {
 		return new UserRealm();
+	}
+
+	// 权限管理，配置主要是Realm的管理认证
+	@Bean
+	public SecurityManager securityManager() {
+		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+		securityManager.setRealm(myShiroRealm());
+		return securityManager;
+	}
+
+	// Filter工厂，设置对应的过滤条件和跳转条件
+	@Bean
+	public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
+		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+		shiroFilterFactoryBean.setSecurityManager((org.apache.shiro.mgt.SecurityManager) securityManager);
+		Map<String, String> map = new HashMap<>();
+		// 登出
+		map.put("/logout", "logout");
+		//swagger放行
+		map.put("/swagger-ui.html", "anon");
+		map.put("/webjars/springfox-swagger-ui/**", "anon");
+		map.put("/swagger-resources/**", "anon");
+		map.put("/v2/api-docs", "anon");
+		//自定义
+		map.put("/wdnmd/getName", "anon");
+		// 对所有用户认证
+				map.put("/**", "authc");
+		// 登录
+		shiroFilterFactoryBean.setLoginUrl("/wdnmd/login");
+		// 首页
+		shiroFilterFactoryBean.setSuccessUrl("/wdnmd/home");
+		// 错误页面，认证不通过跳转
+		shiroFilterFactoryBean.setUnauthorizedUrl("/wdnmd/error");
+		shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
+		return shiroFilterFactoryBean;
+	}
+
+	// 注入权限管理
+	@Bean
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+		authorizationAttributeSourceAdvisor.setSecurityManager((org.apache.shiro.mgt.SecurityManager) securityManager);
+		return authorizationAttributeSourceAdvisor;
 	}
 }

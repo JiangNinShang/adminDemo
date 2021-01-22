@@ -62,3 +62,10 @@ CREATE TABLE Ua(
   aid int(11) NOT NULL COMMENT '地址编号'
 ) ;
 
+
+CREATE TABLE Jp(
+  jpid int(11) PRIMARY KEY COMMENT '编号',
+  pid int(11) NOT NULL COMMENT '职位编号',
+  jid int(11) NOT NULL COMMENT '权限编号'
+) ;
+

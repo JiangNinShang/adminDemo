@@ -1,5 +1,9 @@
 package main.newer.service;
 
-public interface UserPositionService {
+import java.util.List;
 
+import main.newer.domain.UserPosition;
+
+public interface UserPositionService {
+	public List<UserPosition> getbyuid(int uid);
 }

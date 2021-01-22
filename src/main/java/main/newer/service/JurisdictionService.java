@@ -1,5 +1,9 @@
 package main.newer.service;
 
-public interface JurisdictionService {
+import java.util.List;
 
+import main.newer.domain.Jurisdiction;
+
+public interface JurisdictionService {
+	public List<Jurisdiction> getbuJid(int jid);
 }

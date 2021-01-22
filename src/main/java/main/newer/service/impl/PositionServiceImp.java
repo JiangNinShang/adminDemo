@@ -1,7 +1,27 @@
 package main.newer.service.impl;
 
-import main.newer.service.PositionService;
+import java.util.List;
 
-public class PositionServiceImpk implements PositionService{
+import org.springframework.beans.factory.annotation.Autowired;
+
+import main.newer.domain.Position;
+import main.newer.mapper.PositionMapper;
+import main.newer.service.PositionService;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
+
+public class PositionServiceImp implements PositionService{
+
+	@Autowired
+	PositionMapper pm;
+	
+	@Override
+	public List<Position> getbypid(int pid) {
+		Example e = new Example(Position.class);
+		Criteria c = e.createCriteria();
+		c.andEqualTo("pid", pid);
+		List<Position> list = pm.selectByExample(e);
+		return list;
+	}
 
 }

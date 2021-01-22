@@ -1,5 +1,9 @@
 package main.newer.service;
 
-public interface PositionService {
+import java.util.List;
 
+import main.newer.domain.Position;
+
+public interface PositionService {
+	public List<Position> getbypid(int pid);
 }

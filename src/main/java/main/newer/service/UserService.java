@@ -2,6 +2,7 @@ package main.newer.service;
 
 import java.util.HashMap;
 
+import main.newer.domain.User;
 import main.newer.dto.UserDto;
 
 public interface UserService {
@@ -35,4 +36,7 @@ public interface UserService {
 	 * @return
 	 */
 	Boolean updataPwd(String name,String pwd);
+	
+	User getUserByName(String name);
+	
 }

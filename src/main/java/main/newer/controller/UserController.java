@@ -37,10 +37,10 @@ public class UserController {
 	@ApiOperation("用户登录")
 	@PostMapping("/login")
 	@RequestMapping("login")
-	public String login(@RequestBody UserDto user) {
+	public ResultJSON login(@RequestBody UserDto user) {
 		logger.info(user.toString());
 		if (StringUtils.isEmpty(user.getUname()) || StringUtils.isEmpty(user.getUpwd())) {
-			return new ResultJSON(false, "用户名或密码为空", 400).toJson();
+			return new ResultJSON(false, "用户名或密码为空", 400);
 		}
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken upt = new UsernamePasswordToken(user.getUname(), user.getUpwd());
@@ -49,18 +49,19 @@ public class UserController {
 			subject.login(upt);
 		} catch (UnknownAccountException e) {
 			logger.info("用户名不存在！");
-			return ResultJSON.error("用户名不存在").toJson();
+			return ResultJSON.error("用户名不存在");
 		} catch (AuthenticationException e) {
 			logger.info("账号或密码错误！");
-			return ResultJSON.error("账号或密码错误").toJson();
+			return ResultJSON.error("账号或密码错误");
 		} catch (AuthorizationException e) {
 			logger.info("没有权限！");
-			return ResultJSON.error("没有权限").toJson();
+			return ResultJSON.error("没有权限");
 		}
 		if(user.isAuto()) {
 			//记住我
+			
 		}
-		return ResultJSON.ok(us.Login(user)).toJson();
+		return ResultJSON.ok(us.Login(user));
 	}
 
 	@ApiOperation("用户注册")

@@ -21,6 +21,20 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<!-- 采用代码测试用Controller用，模拟前后端分离 -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>29.0-jre</version>
+		</dependency>
 		<!--导入配置文件处理器,配置文件进行绑定有提示 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -92,7 +106,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.2.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -140,7 +158,36 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>1.4.0</version>
+		</dependency>
 
+		<!-- shiro+redis缓存插件 -->
+		<dependency>
+			<groupId>org.crazycake</groupId>
+			<artifactId>shiro-redis</artifactId>
+			<version>2.4.2.1-RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>shiro-core</artifactId>
+					<groupId>org.apache.shiro</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>shiro-core</artifactId>
+					<groupId>org.apache.shiro</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jedis</artifactId>
+					<groupId>redis.clients</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

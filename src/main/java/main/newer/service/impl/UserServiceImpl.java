@@ -2,6 +2,7 @@ package main.newer.service.impl;
 
 import java.util.HashMap;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,33 +17,6 @@ import tk.mybatis.mapper.entity.Example.Criteria;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserMapper um;
-
-	/**
-	 * 登录验证
-	 */
-	@Override
-	public Boolean Login(UserDto user) {
-		Example e = new Example(User.class);
-		Criteria c = e.createCriteria();
-		c.andEqualTo("uname", user.getUname());
-		c.andEqualTo("upwd", user.getUpwd());
-		User ur = um.selectOneByExample(e);
-		if (null == ur) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public Boolean regiest(UserDto user) {
-		User u = new User(user.getUname(), user.getUpwd(), 0, user.getPhone(), user.getSex(), user.getAge(), 0,
-				user.getMail(), 0, 0);
-		int i = um.insert(u);
-		if (i == 0) {
-			return false;
-		}
-		return true;
-	}
 
 	@Override
 	public HashMap<String, Object> getName() {
@@ -73,7 +47,7 @@ public class UserServiceImpl implements UserService {
 		User user = um.selectOneByExample(e);
 		user.setUpwd(pwd);
 		int num = um.updateByPrimaryKey(user);
-		if(num!= 1) {
+		if (num != 1) {
 			return false;
 		}
 		return true;
@@ -85,6 +59,29 @@ public class UserServiceImpl implements UserService {
 		Criteria c = e.createCriteria();
 		c.andEqualTo("uname", name);
 		return um.selectOneByExample(e);
+	}
+
+	@Override
+	public User getUser(String name, String pwd) {
+		Example e = new Example(User.class);
+		Criteria c = e.createCriteria();
+		c.andEqualTo("uname", name);
+		c.andEqualTo("upwd", pwd);
+		User u = um.selectOneByExample(e);
+		return u;
+	}
+
+	@Override
+	public Boolean regiest(UserDto user) {
+		SimpleHash hash = new SimpleHash("md5", user.getUpwd(), "jns"+user.getUname(), 1024);
+		System.out.println(hash.toString());
+		User u = new User(user.getUname(),hash.toString() , "jns"+user.getUname(), 1, user.getPhone(), user.getSex(), user.getAge(), 0,
+				user.getMail(), 0, 0);
+		int i = um.insertSelective(u);
+		if (i == 0) {
+			return false;
+		}
+		return true;
 	}
 
 }

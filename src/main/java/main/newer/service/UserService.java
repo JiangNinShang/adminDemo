@@ -7,12 +7,6 @@ import main.newer.dto.UserDto;
 
 public interface UserService {
 	/**
-	 * 登录的方法
-	 * @param user
-	 * @return boolean
-	 */
-	Boolean Login(UserDto user);
-	/**
 	 * 注册的方法
 	 * @param user
 	 * @return
@@ -38,5 +32,7 @@ public interface UserService {
 	Boolean updataPwd(String name,String pwd);
 	
 	User getUserByName(String name);
+	
+	User getUser(String name,String pwd);
 	
 }

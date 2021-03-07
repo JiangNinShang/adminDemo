@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 @ApiModel("图片")
@@ -19,22 +20,32 @@ public class Picture implements Serializable{
 	@Id
 	@ApiModelProperty("编号")
 	private Integer pid;
-	@Column(name = "pPath")
+	@Column(name = "name")
+	@ApiModelProperty("名称")
+	private String name;
+	@Column(name = "url")
 	@ApiModelProperty("路径")
-	private String pPath;
+	private String url;
 	
 	public Picture() {
 	}
 
 	@Override
 	public String toString() {
-		return "Picture [pid=" + pid + ", pPath=" + pPath + "]";
+		return "Picture [pid=" + pid + ", name=" + name + ", url=" + url + "]";
 	}
 
-	public Picture(Integer pid, String pPath) {
+	public Picture(String name, String url) {
+		super();
+		this.name = name;
+		this.url = url;
+	}
+
+	public Picture(Integer pid, String name, String url) {
 		super();
 		this.pid = pid;
-		this.pPath = pPath;
+		this.name = name;
+		this.url = url;
 	}
 
 	public Integer getPid() {
@@ -45,13 +56,26 @@ public class Picture implements Serializable{
 		this.pid = pid;
 	}
 
-	public String getpPath() {
-		return pPath;
+	public String getName() {
+		return name;
 	}
 
-	public void setpPath(String pPath) {
-		this.pPath = pPath;
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 	
 }

@@ -28,7 +28,7 @@ import main.newer.util.HttpHost;
 
 @CrossOrigin(origins = "*", maxAge = 3600) // @CrossOrigin所有网站都可以跨域访问
 @RestController
-@RequestMapping("wdnmd")
+@RequestMapping("user")
 public class UserController {
 
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -44,8 +44,6 @@ public class UserController {
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUname(), user.getUpwd(), user.isAuto(),h.getCliectIp(http));
 		try {
 			// 进行验证，这里可以捕获异常，然后返回对应信息
-
-			
 			subject.login(token);
 		} catch (UnknownAccountException e) {
 			logger.info("用户名不存在！");
@@ -57,6 +55,7 @@ public class UserController {
 			logger.info("没有权限！");
 			return ResultJSON.error("没有权限");
 		}
+		
 		return ResultJSON.ok("登录成功");
 	}
 

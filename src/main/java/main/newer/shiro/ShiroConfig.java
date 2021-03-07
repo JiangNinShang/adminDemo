@@ -152,16 +152,19 @@ public class ShiroConfig {
          */
         //此处应该使用LinkedHashMap，否则会出现资源只能加载一次然后就被拦截的情况
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/logout", "logout");
+        	filterChainDefinitionMap.put("/user/logout", "logout");
      		// swagger放行
-     		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+     		filterChainDefinitionMap.put("/swagger-ui.html", "authc");
      		filterChainDefinitionMap.put("/webjars/springfox-swagger-ui/**", "anon");
      		filterChainDefinitionMap.put("/swagger-resources/**", "anon");
      		filterChainDefinitionMap.put("/v2/api-docs", "anon");
      		// 自定义
-     		filterChainDefinitionMap.put("/wdnmd/login", "anon");
-     		filterChainDefinitionMap.put("/wdnmd/getName", "anon");
-     		filterChainDefinitionMap.put("/wdnmd/register", "anon");
+     		filterChainDefinitionMap.put("/user/logout", "anon");
+     		filterChainDefinitionMap.put("/user/login", "anon");
+     		filterChainDefinitionMap.put("/user/getName", "anon");
+     		filterChainDefinitionMap.put("/user/register", "anon");
+     		filterChainDefinitionMap.put("/Clothing/tpsc", "anon");
+     		filterChainDefinitionMap.put("/Clothing/wqnmd", "anon");
      		// 对所有用户认证
      		filterChainDefinitionMap.put("/**", "authc");
      		factoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

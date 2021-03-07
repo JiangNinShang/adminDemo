@@ -25,7 +25,6 @@ public class Address implements Serializable {
 	private String address;
 	
 	public Address() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Address(int aid, String address) {

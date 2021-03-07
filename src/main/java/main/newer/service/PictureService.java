@@ -1,5 +1,7 @@
 package main.newer.service;
 
-public interface PictureService {
+import main.newer.dto.PictureDto;
 
+public interface PictureService {
+	String add(PictureDto [] p);
 }
